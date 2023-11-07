@@ -1,0 +1,94 @@
+<html>
+  <body>
+    <h1>ESP32-Rover</h1>
+    <head>
+      <meta name=viewport content="" width=device-width, initial-scale=1>
+      <link rel=\"icon\" href=\"data:,\">
+      <style>
+        html {
+          font-family: Helvetica;
+          display: inline-block;
+          margin: 20px auto;
+          text-align: center;
+        }
+        
+        sliderH {
+            width: 300px;
+            rotate: 270deg;
+            position: relative;
+            top: 150px; left: -100px;
+        }
+        
+        button { 
+            background-color: #4CAF50; 
+            border: none; 
+            color: white; 
+            padding: 16px 20px;
+            text-decoration: none; 
+            font-size: 30px;
+            white-space: nowrap;
+            margin: 10px 10px; 
+            cursor: pointer;
+            
+        }
+        
+        pos1 {
+            position: fixed;
+            top: 300px; left: 250px;
+        }
+        
+        pos2 {
+            position: fixed;
+            top: 300px; left: 350px;
+        }
+      </style>
+    </head>
+    <h2>
+        <html>
+        <p>Motor: <output id="num">0</output></p>
+        <input type='range' min='-1.0' max='1.0' value='0.0' step = '0.1' onchange='updateSliderValue(this.value);' oninput="num.value = this.value">
+        </html>
+    </h2>
+    <script>
+      function updateSliderValue(value) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open(\"GET\",\"/slider?value=\"+value,true);xhttp.send();}
+    </script>
+    
+    <h3>
+        <p>Angle: <output id="number">0</output></p>
+      <input type='range' min='-1.0' max='1.0' value='0.0' step = '0.1' onchange='updateSliderValue1(this.value);' oninput="number.value = this.value">
+    </h3>
+    
+    <script>
+      function updateSliderValue1(value) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open(\"GET\",\"/slider1?value=\"+value,true);xhttp.send();}
+    </script>
+    
+    <h4><pos1>
+      <button onclick='toggleButtonON()'>ON</button>
+      <br>
+      <script>
+        function toggleButtonON() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.open('GET', '/toggle?value=1', true);
+          xhttp.send();
+        }
+      </script>
+      </pos1>
+    
+        <pos2>
+      <button class='button1' onclick='toggleButtonOFF()'>OFF</button>
+      <br>
+      <script>
+        function toggleButtonOFF() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.open('GET', '/toggle?value=0', true);
+          xhttp.send();
+        }
+      </script>
+      </pos2>
+     </h4>
+  </body>
+</html>

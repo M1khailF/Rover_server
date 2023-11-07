@@ -1,0 +1,1 @@
+g++ example.cpp ESP32_Rover.cpp -o example -lcurl

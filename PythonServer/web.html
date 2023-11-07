@@ -1,0 +1,31 @@
+<html><body><h1>ESP32-Rover</h1>
+
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}
+button { background-color: #4CAF50; border: none; color: white; padding: 16px 20px;text-decoration: none; font-size: 30px;white-space: nowrap;margin: 10px 10px; cursor: pointer;}
+pos1 {position: relative;top: 0px; left: 60px;}
+pos2 {position: relative;top: -86px; left: 50px;}
+</style></head>
+
+<h2><p>Motor: <output id='motorValue'>0.0</output></p><input type='range' min='0.0' max='1.0' value='" + String(MotorValue) + "' step = '0.01' onchange='updateSliderValueMotor(this.value);'oninput='motorValue.value = this.value'></h2>
+<script>function updateSliderValueMotor(value){var xhttp=new XMLHttpRequest();xhttp.open("GET","/motor?value="+value,true);xhttp.send();}</script>
+
+<h3><p>Angle: <output id='angleValue'>0.0</output></p><input type='range' min='-1.0' max='1.0' value='" + String(AngleValue) + "' step = '0.01' onchange='updateSliderValueAngle(this.value);'oninput='angleValue.value = this.value'></h3>
+<script>function updateSliderValueAngle(value){var xhttp=new XMLHttpRequest();xhttp.open("GET","/angle?value="+value,true);xhttp.send();}</script>
+
+<h4><button onclick='toggleButtonON()'>ARM</button><br>
+
+<script>function toggleButtonON() {
+var xhttp = new XMLHttpRequest();
+xhttp.open('GET', '/armState?value=1', true);
+xhttp.send(); }</script>
+
+<button onclick='toggleButtonOFF()'>DISARM</button><br>
+
+<script>function toggleButtonOFF() {
+var xhttp = new XMLHttpRequest();
+xhttp.open('GET', '/armState?value=0', true);
+xhttp.send(); }</script></h4>
+
+</body></html>
